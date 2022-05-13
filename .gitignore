@@ -1,0 +1,4 @@
+vmware-iso
+vmware-iso/**
+packer_cache
+packer_cache/**
