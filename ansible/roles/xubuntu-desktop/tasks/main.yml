@@ -1,0 +1,23 @@
+- name: Install APT packages
+  package:
+    name:
+      - xubuntu-desktop
+      - xrdp
+    state: latest
+  become: yes
+
+- name: Change to lightdm
+  copy:
+    dest: /etc/X11/default-display-manager
+    content: /usr/sbin/lightdm
+  become: yes
+
+- name: Reconfigure lightdm
+  command: "{{ item }}"
+  with_items:
+  - dpkg-reconfigure lightdm
+  - echo set shared/default-x-display-manager lightdm | debconf-communicate
+  environment:
+    DEBIAN_FRONTEND: "noninteractive"
+    DEBCONF_NONINTERACTIVE_SEEN: "true"
+  become: yes
