@@ -1,0 +1,21 @@
+- name: Add Microsoft APT key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+  become: yes
+
+- name: Get lsb_release
+  command: lsb_release -cs
+  register: lsb_release
+
+- name: Add Microsoft package source
+  apt_repository:
+    filename: azure-cli.list
+    install_python_apt: true
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ lsb_release.stdout }} main
+  become: yes
+
+- name: Install Azure CLI
+  package:
+    name: azure-cli
+    state: latest
+  become: yes

@@ -1,0 +1,18 @@
+- name: Add gcloud APT key
+  get_url:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    dest: /usr/share/keyrings/cloud.google.gpg
+  become: yes
+
+- name: Install gcloud CLI package source
+  apt_repository:
+    filename: google-cloud-sdk.list
+    install_python_apt: true
+    repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
+  become: yes
+  
+- name: Install gcloud CLI
+  package:
+    name: google-cloud-cli
+    state: latest
+  become: yes

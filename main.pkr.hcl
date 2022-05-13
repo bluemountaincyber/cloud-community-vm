@@ -11,6 +11,7 @@ build {
   }
 
   provisioner "ansible-local" {
+    playbook_dir = "${path.root}/ansible/"
     playbook_file = "${path.root}/ansible/playbook.yml"
   }
 }

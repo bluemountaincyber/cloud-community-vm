@@ -2,71 +2,8 @@
 - name: vm-configure
   hosts: 127.0.0.1
   connection: local
-
-  tasks:
-    - name: Install APT packages
-      package:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - gnupg
-          - lsb-release
-          - curl
-          - unzip
-        state: latest
-      become: yes
-
-    - name: Download AWS CLI
-      get_url:
-        url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
-        dest: /tmp/awscliv2.zip
-
-    - name: Unzip AWS CLI files
-      unarchive:
-        src: /tmp/awscliv2.zip
-        dest: /tmp/
-
-    - name: Install AWS CLI
-      command: /tmp/aws/install --update
-      become: yes
-
-    - name: Add Microsoft APT key
-      apt_key:
-        url: https://packages.microsoft.com/keys/microsoft.asc
-      become: yes
-
-    - name: Get lsb_release
-      command: lsb_release -cs
-      register: lsb_release
-
-    - name: Add Microsoft package source
-      apt_repository:
-        filename: azure-cli.list
-        install_python_apt: true
-        repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ lsb_release.stdout }} main
-      become: yes
-
-    - name: Install Azure CLI
-      package:
-        name: azure-cli
-        state: latest
-      become: yes
-
-    - name: Add gcloud APT key
-      get_url:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        dest: /usr/share/keyrings/cloud.google.gpg
-      become: yes
-
-    - name: Install gcloud CLI package source
-      apt_repository:
-        filename: google-cloud-sdk.list
-        install_python_apt: true
-        repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
-      become: yes
-      
-    - name: Install gcloud CLI
-      package:
-        name: google-cloud-cli
-        state: latest
-      become: yes
+  roles:
+    - common
+    - aws-cli
+    - azure-cli
+    - gcloud-cli

@@ -1,0 +1,11 @@
+- name: Install APT packages
+  package:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      - lsb-release
+      - curl
+      - unzip
+    state: latest
+  become: yes
