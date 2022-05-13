@@ -136,7 +136,7 @@ variable "gcp_project_id" {
 
 variable "gcp_service_account_credentials_file" {
   type = string
-  default = "C:\\Users\\instructor\\Downloads\\sroc-testing-3f9567c7abeb.json"
+  default = ""
 }
 
 # VMware ISO-specific variables
