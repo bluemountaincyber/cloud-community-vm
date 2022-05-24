@@ -16,7 +16,7 @@ variable "password" {
 
 variable "disk_size" {
   type    = number
-  default = 20
+  default = 40
 }
 
 # Amazon EBS-specific variables

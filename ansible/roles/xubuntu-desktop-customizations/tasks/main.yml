@@ -1,0 +1,9 @@
+- name: Install community.general collection
+  command: ansible-galaxy collection install community.general
+
+- name: Adjust panel size
+  community.general.xfconf:
+    channel: xfce4-panel
+    property: /panels/panel-0/size
+    value: 36
+    value_type: int

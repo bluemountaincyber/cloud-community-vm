@@ -1,0 +1,16 @@
+- name: Download Microsoft repository GPG keys
+  get_url:
+    dest: /tmp/packages-microsoft-prod.deb
+    url: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+
+- name: Install Microsoft repository GPG keys
+  apt: 
+    deb: /tmp/packages-microsoft-prod.deb
+  become: yes
+
+- name: Install Powershell
+  apt:
+    name: powershell
+    update_cache: yes
+    state: latest
+  become: yes

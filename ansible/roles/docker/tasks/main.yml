@@ -1,0 +1,41 @@
+- name: Install Docker GPG Key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+  become: yes
+
+- name: Get Architecture
+  command: dpkg --print-architecture
+  register: architecture
+
+- name: Get lsb_release
+  command: lsb_release -cs
+  register: lsb_release
+
+- name: Add Docker repo
+  apt_repository:
+    filename: docker
+    install_python_apt: true
+    repo: "deb [arch={{ architecture.stdout }}] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
+  become: yes
+
+- name: Install APT Packages
+  package:
+    name:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io 
+      - docker-compose-plugin
+      - docker-compose
+    state: latest
+  become: yes
+
+- name: Get current user
+  command: whoami
+  register: whoami
+
+- name: Add user to Docker group
+  user:
+    name: "{{ whoami.stdout }}"
+    groups: docker
+    append: yes
+  become: yes

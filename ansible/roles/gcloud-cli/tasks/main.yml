@@ -6,7 +6,7 @@
 
 - name: Install gcloud CLI package source
   apt_repository:
-    filename: google-cloud-sdk.list
+    filename: google-cloud-sdk
     install_python_apt: true
     repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
   become: yes

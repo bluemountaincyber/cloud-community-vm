@@ -9,7 +9,7 @@
 
 - name: Add Microsoft package source
   apt_repository:
-    filename: azure-cli.list
+    filename: azure-cli
     install_python_apt: true
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ lsb_release.stdout }} main
   become: yes

@@ -7,4 +7,8 @@
     - aws-cli
     - azure-cli
     - gcloud-cli
+    - docker
+    - powershell
+    # - k3s
     - xubuntu-desktop
+    # - xubuntu-desktop-customizations

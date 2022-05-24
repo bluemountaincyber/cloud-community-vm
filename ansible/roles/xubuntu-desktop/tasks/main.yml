@@ -3,6 +3,7 @@
     name:
       - xubuntu-desktop
       - xrdp
+      - open-vm-tools-desktop
     state: latest
   become: yes
 
